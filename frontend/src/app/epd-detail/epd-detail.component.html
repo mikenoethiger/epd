@@ -1,0 +1,13 @@
+<div class="container">
+  <p><a [routerLink]="['/epds']">Zurück</a></p>
+  <h1>EPD: {{ epd.name }}</h1>
+  <a [routerLink]="['/ehr-create', epd.id]" class="btn btn-default btn-lg">Daten hinzufügen
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  </a>
+  <dl *ngFor="let ehr of epd.ehrs" class="list">
+    <dt>Name</dt>
+    <dd>{{ ehr.name }}</dd>
+    <dt>Permissions</dt>
+    <dd *ngFor="let permittedPublicKey of ehr.permittedPublicKeys">{{ permittedPublicKey }}</dd>
+  </dl>
+</div>
