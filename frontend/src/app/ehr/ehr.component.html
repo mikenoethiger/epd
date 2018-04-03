@@ -4,7 +4,7 @@
       <form class="form-signin" (ngSubmit)="requestAccess()">
         <h1 class="display-1 text-center"><i class="fas fa-lock text-danger"></i></h1>
         <br>
-        <p><i>{{ ehr.id }}</i></p>
+        <p><i>EHR: {{ ehr.id }}</i></p>
         <h1 class="h3 mb-3 font-weight-normal">EHR Zugriff anfordern</h1>
 
         <label for="publicKey" class="sr-only">Ihr Public Key</label>
@@ -13,7 +13,7 @@
         <br>
         <label for="signature" class="sr-only">Signatur</label>
         <input [(ngModel)]="accessRequest.requesterSignature" name="requesterSignature" type="number" id="signature" class="form-control" placeholder="Ihre Signatur" required="">
-        <small class="form-text text-muted text-left">Die Signatur erstellen Sie, indem Sie die Zahl 12345 mit Ihrem Private Key verschlüsseln.</small>
+        <small class="form-text text-muted text-left">Die Signatur erstellen Sie, indem Sie die Zahl 12345 mit Ihrem Private Key verschlüsseln. Benutzen sie das Verschlüsselungstool dazu.</small>
         <br>
         <button class="btn btn-lg btn-danger btn-block" type="submit">Zugriff anfordern</button>
         <a [routerLink]="['/epds']" class="btn btn-default text-center">Abbrechen</a>

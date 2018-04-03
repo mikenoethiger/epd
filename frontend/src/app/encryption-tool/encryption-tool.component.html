@@ -1,26 +1,31 @@
 <div class="container">
-  <h1 class="display-1 text-center"><i class="fas fa-user-secret"></i></h1>
-  <h1 class="text-center">Verschlüsseln</h1>
   <div class="row justify-content-md-center">
-    <div class="col-md-6 cold-sm-12">
-      <form (ngSubmit)="encryptText()" #contactForm="ngForm">
-        <div class="form-group">
-          <label for="number">Nummer</label>
-          <input type="number" class="form-control" [(ngModel)]="number" name="number" id="number" required>
+    <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 40px;">
+      <div class="card mb-4 box-shadow">
+        <!--<h1 class="card-img-top display-1 text-center" style="height: 180px; width: 100%; display: block; color: #706f6f; padding: 40px"><i class="fas fa-database"></i></h1>-->
+        <h1 class="card-img-top display-1 text-center" style="height: 140px; width: 100%; display: block; padding: 40px"><i class="fas fa-user-secret"></i></h1>
+        <div class="card-body">
+          <h1 class="text-center">Verschlüsseln</h1>
+          <form (ngSubmit)="encryptText()" #contactForm="ngForm">
+            <div class="form-group">
+              <label for="number">Nummer</label>
+              <input type="number" class="form-control" [(ngModel)]="number" name="number" id="number" required>
+            </div>
+            <div class="form-group">
+              <label for="key">Schlüssel</label>
+              <input type="text" class="form-control" [(ngModel)]="key" name="key" id="key" required>
+            </div>
+            <div class="form-group">
+              <label for="encrypted">Verschlüsselt</label>
+              <input readonly type="number" class="form-control" [(ngModel)]="encrypted" name="encrypted" id="encrypted">
+            </div>
+            <p class="text-center">
+              <button type="submit" class="btn btn-success btn-block">Verschlüsseln</button>
+              <a [routerLink]="['/epds']" class="btn btn-default">Zurück</a>
+            </p>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="key">Schlüssel</label>
-          <input type="text" class="form-control" [(ngModel)]="key" name="key" id="key" required>
-        </div>
-        <div class="form-group">
-          <label for="encrypted">Verschlüsselt</label>
-          <input readonly type="number" class="form-control" [(ngModel)]="encrypted" name="encrypted" id="encrypted">
-        </div>
-        <div class="form-group">
-          <a [routerLink]="['/epds']" class="btn btn-default">Zurück</a>
-          <button type="submit" class="btn btn-success">Verschlüsseln</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
