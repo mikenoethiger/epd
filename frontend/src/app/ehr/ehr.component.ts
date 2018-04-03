@@ -59,7 +59,7 @@ export class EhrComponent implements OnInit {
 
   openEhr() {
     this.showRequestAccess = false;
-    this.showEhr = true;
     this.showAccessResponse = false;
+    this.showEhr = true;
   }
 }
