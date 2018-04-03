@@ -9,7 +9,7 @@
               <form enctype="multipart/form-data" (ngSubmit)="saveEhr()" #contactForm="ngForm">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" [(ngModel)]="ehr.name" name="name" id="name" required>
+                  <input type="text" class="form-control" [(ngModel)]="ehr.name" name="name" id="name" placeholder="Röntgenbild" required>
                 </div>
                 <div class="form-group">
                   <label for="image">Bild</label>
