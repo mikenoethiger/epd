@@ -19,7 +19,7 @@ export class EpdCreateComponent implements OnInit {
   saveEpd() {
     this.http.post('/epd', this.epd)
       .subscribe(res => {
-          this.router.navigate(['/epd-detail', res['id']]);
+          this.router.navigate(['/epds']);
         }, (err) => {
           console.log(err);
         }

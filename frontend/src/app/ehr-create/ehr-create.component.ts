@@ -31,7 +31,7 @@ export class EhrCreateComponent implements OnInit {
     this.http.post('/epd/' + this.epdId + '/ehr', formData)
       .subscribe(res => {
           console.log(res);
-          this.router.navigate(['/epd-detail', this.epdId]);
+          this.router.navigate(['/epds']);
         }, (err) => {
           console.log(err);
         }
