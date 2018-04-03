@@ -1,6 +1,7 @@
 <div class="container">
-  <h1>EHR hinzufügen</h1>
-  <div class="row">
+  <h1 class="display-1 text-center"><i class="fas fa-plus-circle"></i></h1>
+  <h1 class="text-center">EHR hinzufügen</h1>
+  <div class="row justify-content-md-center">
     <div class="col-md-6">
       <form enctype="multipart/form-data" (ngSubmit)="saveEhr()" #contactForm="ngForm">
         <div class="form-group">
@@ -9,10 +10,13 @@
         </div>
         <div class="form-group">
           <label for="image">Bild</label>
-          <input type="file" (change)="handleFileInput($event.target.files)" name="image" id="image" required>
+          <div class="custom-file">
+            <input type="file" (change)="handleFileInput($event.target.files)" class="custom-file-input" name="image" id="image" required>
+            <label class="custom-file-label">Bild auswählen</label>
+          </div>
         </div>
         <div class="form-group">
-          <a [routerLink]="['/epd-detail', epdId]" class="btn btn-default">Abbrechen</a>
+          <a [routerLink]="['/epds']" class="btn btn-default">Abbrechen</a>
           <button type="submit" class="btn btn-success" [disabled]="!contactForm.form.valid">Speichern</button>
         </div>
       </form>

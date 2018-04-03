@@ -1,0 +1,22 @@
+<div class="container">
+  <h1 class="display-1 text-center"><i class="fas fa-exchange-alt"></i></h1>
+  <h1 class="text-center">Text zu Nummern</h1>
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 cold-sm-12">
+      <form (ngSubmit)="convertText()" #contactForm="ngForm">
+        <div class="form-group">
+          <label for="text">Text</label>
+          <input type="text" class="form-control" [(ngModel)]="text" name="text" id="text">
+        </div>
+        <div class="form-group">
+          <label for="number">Nummer</label>
+          <input readonly type="text" class="form-control" [(ngModel)]="number" name="number" id="number">
+        </div>
+        <div class="form-group">
+          <a [routerLink]="['/epds']" class="btn btn-default">Zurück</a>
+          <button type="submit" class="btn btn-success">Konvertieren</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

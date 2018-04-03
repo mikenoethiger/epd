@@ -9,6 +9,11 @@ import { EpdsComponent } from './epds/epds.component';
 import { EpdDetailComponent } from './epd-detail/epd-detail.component';
 import { EpdCreateComponent } from './epd-create/epd-create.component';
 import { EhrCreateComponent } from './ehr-create/ehr-create.component';
+import { KeyCreateComponent } from './key-create/key-create.component';
+import { EhrComponent } from './ehr/ehr.component';
+import { TexttonumberToolComponent } from './texttonumber-tool/texttonumber-tool.component';
+import { EncryptionToolComponent } from './encryption-tool/encryption-tool.component';
+import { AddPermissionComponent } from './add-permission/add-permission.component';
 
 const appRoutes: Routes = [
   {
@@ -31,6 +36,31 @@ const appRoutes: Routes = [
     component: EhrCreateComponent,
     data: { title: 'EHR hinzufügen' }
   },
+  {
+    path: 'add-permission/:id',
+    component: AddPermissionComponent,
+    data: { title: 'Berechtigung hinzufügen' }
+  },
+  {
+    path: 'ehr/:id',
+    component: EhrComponent,
+    data: { title: 'EHR Details' }
+  },
+  {
+    path: 'key-create',
+    component: KeyCreateComponent,
+    data: { title: 'Key Generieren' }
+  },
+  {
+    path: 'texttonumber-tool',
+    component: TexttonumberToolComponent,
+    data: { title: 'Text2Nummer Tool' }
+  },
+  {
+    path: 'encryption-tool',
+    component: EncryptionToolComponent,
+    data: { title: 'Verschlüsselungs Tool' }
+  },
   { path: '',
     redirectTo: '/epds',
     pathMatch: 'full'
@@ -43,7 +73,12 @@ const appRoutes: Routes = [
     EpdsComponent,
     EpdDetailComponent,
     EpdCreateComponent,
-    EhrCreateComponent
+    EhrCreateComponent,
+    KeyCreateComponent,
+    EhrComponent,
+    TexttonumberToolComponent,
+    EncryptionToolComponent,
+    AddPermissionComponent
   ],
   imports: [
     BrowserModule,

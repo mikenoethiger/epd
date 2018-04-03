@@ -12,13 +12,17 @@ public class Ehr {
 	String id;
 	String name;
 	String imageUrl;
+	String ownerName;
+	String ownerPublicKey;
 	List<String> permittedPublicKeys;
 	
 	public Ehr() {}
 	
-	public Ehr(String name, String imageUrl, List<String> permittedPublicKeys) {
+	public Ehr(String name, String imageUrl, String ownerName, String ownerPublicKey, List<String> permittedPublicKeys) {
 		this.name = name;
 		this.imageUrl = imageUrl;
+		this.ownerName = ownerName;
+		this.ownerPublicKey = ownerPublicKey;
 		this.permittedPublicKeys = permittedPublicKeys;
 	}
 
@@ -58,4 +62,20 @@ public class Ehr {
 		this.permittedPublicKeys = permittedPublicKeys;
 	}
 
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public String getOwnerPublicKey() {
+		return ownerPublicKey;
+	}
+
+	public void setOwnerPublicKey(String ownerPublicKey) {
+		this.ownerPublicKey = ownerPublicKey;
+	}
+	
 }

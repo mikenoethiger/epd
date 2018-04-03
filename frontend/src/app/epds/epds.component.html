@@ -1,22 +1,86 @@
 <div class="container">
-  <h1>EPDs <a [routerLink]="['/epd-create']" class="btn btn-default btn-lg">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-  </a></h1>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Elektronische Patientendossiers</h1>
+    </div>
 
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>EHRs</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let epd of epds">
-      <td>{{ epd.name }}</td>
-      <td>{{ epd.ehrs ? epd.ehrs.length : 0 }}</td>
-      <td><a [routerLink]="['/epd-detail', epd.id]">Show Detail</a></td>
-    </tr>
-    </tbody>
-  </table>
+    <div *ngFor="let epd of epds" class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top" alt="{{epd.name}} [100%x225]" style="height: 225px; width: 100%; display: block;" src="/assets/front_page_logo_v5.svg" data-holder-rendered="true">
+        <hr>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3>{{ epd.name }}</h3><small class="text-muted">9 mins</small>
+          </div>
+
+          <p>Public Key: <span class="text-right" style="float:right;"><i>{{ epd.publicKey }}</i></span></p>
+
+          <p>Daten</p>
+
+          <table class="table">
+            <thead>
+              <th>Record</th>
+              <th>Berechtigen</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ehr of epd.ehrs">
+              <td><a [routerLink]="['/ehr', ehr.id]">{{ (ehr.id.length>15)? (ehr.id | slice:0:15)+'..':(ehr.id) }}</a></td>
+              <td><button class="btn btn-outline-danger btn-sm"><i class="fas fa-lock"></i></button></td>
+            </tr>
+            </tbody>
+          </table>
+          <a [routerLink]="['/ehr-create', epd.id]" class="btn btn-light btn-block">Daten hinzufügen</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="/assets/plus.svg" data-holder-rendered="true">
+        <div class="card-body">
+          <a [routerLink]="['/epd-create']" class="btn btn-primary btn-block">Neues EPD eröffnen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Tools</h1>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="card mb-4 box-shadow">
+        <h1 class="card-img-top display-1 text-center" style="height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px"><i class="fas fa-key"></i></h1>
+        <div class="card-body">
+          <h3 class="text-center">Schlüsselpaare erzeugen</h3>
+          <br>
+          <a [routerLink]="['/key-create']" class="btn btn-light btn-block">Tool öffnen</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="card mb-4 box-shadow">
+        <h1 class="card-img-top display-1 text-center" style="height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px"><i class="fas fa-exchange-alt"></i></h1>
+        <div class="card-body">
+          <h3 class="text-center">Text zu Nummer</h3>
+          <br>
+          <a [routerLink]="['/texttonumber-tool']" class="btn btn-light btn-block">Tool öffnen</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="card mb-4 box-shadow">
+        <h1 class="card-img-top display-1 text-center" style="height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px"><i class="fas fa-user-secret"></i></h1>
+        <div class="card-body">
+          <h3 class="text-center">Verschlüsseln</h3>
+          <br>
+          <a [routerLink]="['/encryption-tool']" class="btn btn-light btn-block">Tool öffnen</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="mt-5 mb-3 text-muted">© IDPA Blockchain Patientendossier</p>
 </div>
