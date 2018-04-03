@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
-      <h1>Elektronische Patientendossiers</h1>
+    <div _ngcontent-c1="" class="col-sm-12 text-center m-5">
+      <h1 _ngcontent-c1="" class="jumbotron-heading">EPDs</h1>
     </div>
 
     <div *ngFor="let epd of epds" class="col-md-4">
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let ehr of epd.ehrs">
-              <td><a [routerLink]="['/ehr', ehr.id]">{{ (ehr.id.length>15)? (ehr.id | slice:0:15)+'..':(ehr.id) }}</a></td>
+              <td><a [routerLink]="['/ehr', ehr.id]">{{ (ehr.id.length>12)? (ehr.id | slice:0:12)+'..':(ehr.id) }}</a></td>
               <td><a [routerLink]="['/add-permission', ehr.id]" class="btn btn-outline-danger btn-sm"><i class="fas fa-lock"></i></a></td>
             </tr>
             </tbody>

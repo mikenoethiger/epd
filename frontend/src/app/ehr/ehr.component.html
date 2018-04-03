@@ -1,6 +1,6 @@
 <div *ngIf="showRequestAccess" class="container text-center" style="padding: 20px;">
   <div class="row justify-content-md-center">
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12">
       <form class="form-signin" (ngSubmit)="requestAccess()">
         <h1 class="display-1 text-center"><i class="fas fa-lock text-danger"></i></h1>
         <br>
@@ -26,7 +26,7 @@
 
 <div *ngIf="showAccessResponse" class="container" style="padding: 20px;">
   <div class="row justify-content-md-center">
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12">
       <form class="form-signin">
         <h1 *ngIf="!accessResponse.valid" class="display-1 text-center"><i class="fas fa-lock text-danger"></i></h1>
         <h1 *ngIf="accessResponse.valid" class="display-1 text-center"><i class="fas fa-unlock text-success"></i></h1>
@@ -56,7 +56,7 @@
 
 <div *ngIf="showEhr" class="container">
   <div class="row justify-content-md-center">
-    <div class="col-md-4" style="margin-top: 40px;">
+    <div class="col-md-6" style="margin-top: 40px;">
       <div class="card mb-4 box-shadow">
         <!--<h1 class="card-img-top display-1 text-center" style="height: 180px; width: 100%; display: block; color: #706f6f; padding: 40px"><i class="fas fa-database"></i></h1>-->
         <img class="card-img-top" alt="{{ehr.name}} [100%x225]" style="height: 225px; width: 100%; display: block;" src="{{ ehr.imageUrl }}" data-holder-rendered="true">

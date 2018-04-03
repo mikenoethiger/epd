@@ -14,12 +14,18 @@ import { EhrComponent } from './ehr/ehr.component';
 import { TexttonumberToolComponent } from './texttonumber-tool/texttonumber-tool.component';
 import { EncryptionToolComponent } from './encryption-tool/encryption-tool.component';
 import { AddPermissionComponent } from './add-permission/add-permission.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
   {
     path: 'epds',
     component: EpdsComponent,
     data: { title: 'EPD List' }
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    data: { title: 'Home' }
   },
   {
     path: 'epd-detail/:id',
@@ -62,7 +68,7 @@ const appRoutes: Routes = [
     data: { title: 'Verschlüsselungs Tool' }
   },
   { path: '',
-    redirectTo: '/epds',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
@@ -78,7 +84,8 @@ const appRoutes: Routes = [
     EhrComponent,
     TexttonumberToolComponent,
     EncryptionToolComponent,
-    AddPermissionComponent
+    AddPermissionComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
