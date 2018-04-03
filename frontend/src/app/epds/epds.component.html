@@ -25,11 +25,11 @@
             <tbody>
             <tr *ngFor="let ehr of epd.ehrs">
               <td><a [routerLink]="['/ehr', ehr.id]">{{ (ehr.id.length>15)? (ehr.id | slice:0:15)+'..':(ehr.id) }}</a></td>
-              <td><button class="btn btn-outline-danger btn-sm"><i class="fas fa-lock"></i></button></td>
+              <td><a [routerLink]="['/add-permission', ehr.id]" class="btn btn-outline-danger btn-sm"><i class="fas fa-lock"></i></a></td>
             </tr>
             </tbody>
           </table>
-          <a [routerLink]="['/ehr-create', epd.id]" class="btn btn-light btn-block">Daten hinzufügen</a>
+          <a [routerLink]="['/ehr-create', epd.id]" class="btn btn-secondary btn-block">Daten hinzufügen</a>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
         <div class="card-body">
           <h3 class="text-center">Schlüsselpaare erzeugen</h3>
           <br>
-          <a [routerLink]="['/key-create']" class="btn btn-light btn-block">Tool öffnen</a>
+          <a [routerLink]="['/key-create']" class="btn btn-secondary btn-block">Tool öffnen</a>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
         <div class="card-body">
           <h3 class="text-center">Text zu Nummer</h3>
           <br>
-          <a [routerLink]="['/texttonumber-tool']" class="btn btn-light btn-block">Tool öffnen</a>
+          <a [routerLink]="['/texttonumber-tool']" class="btn btn-secondary btn-block">Tool öffnen</a>
         </div>
       </div>
     </div>
@@ -75,7 +75,7 @@
         <div class="card-body">
           <h3 class="text-center">Verschlüsseln</h3>
           <br>
-          <a [routerLink]="['/encryption-tool']" class="btn btn-light btn-block">Tool öffnen</a>
+          <a [routerLink]="['/encryption-tool']" class="btn btn-secondary btn-block">Tool öffnen</a>
         </div>
       </div>
     </div>

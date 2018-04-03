@@ -147,6 +147,6 @@ public class EpdController {
 				return new GetPkOwnerNameRequest(epd.getName());
 			}
 		}
-		return new GetPkOwnerNameRequest("");
+		return new GetPkOwnerNameRequest("Unbekannt");
 	}
 }

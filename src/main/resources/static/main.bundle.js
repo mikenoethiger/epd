@@ -13,6 +13,120 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 
 /***/ }),
 
+/***/ "../../../../../src/app/add-permission/add-permission.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/add-permission/add-permission.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"showRequest\" class=\"container text-center\" style=\"padding: 20px;\">\n  <div class=\"row justify-content-md-center\">\n    <div class=\"col-lg-4 col-md-6 col-sm-12\">\n      <form class=\"form-signin\" (ngSubmit)=\"fireRequest()\">\n        <h1 class=\"display-1 text-center\"><i class=\"fas fa-lock text-danger\"></i></h1>\n        <br>\n        <p><i>EHR: {{ ehrId }}</i></p>\n        <h1 class=\"h3 mb-3 font-weight-normal\">Berechtigung hinzufügen</h1>\n\n        <label for=\"publicKey\" class=\"sr-only\">Public Key</label>\n        <input [(ngModel)]=\"request.publicKey\" name=\"publicKey\" type=\"text\" id=\"publicKey\" class=\"form-control\" placeholder=\"Public Key\" required=\"\" autofocus=\"\">\n        <small class=\"form-text text-muted text-left\">Fügen Sie den Public Key ein den Sie <b>berechtigen</b> wollen.</small>\n        <br>\n        <label for=\"signature\" class=\"sr-only\">Signatur</label>\n        <input [(ngModel)]=\"request.signature\" name=\"requesterSignature\" type=\"number\" id=\"signature\" class=\"form-control\" placeholder=\"Ihre Signatur\" required=\"\">\n        <small class=\"form-text text-muted text-left\">Die Signatur erstellen Sie, indem Sie die Zahl <b>12345</b> mit Ihrem Private Key verschlüsseln.</small>\n        <br>\n        <button class=\"btn btn-lg btn-danger btn-block\" type=\"submit\">Berechtigen</button>\n        <a [routerLink]=\"['/epds']\" class=\"btn btn-default text-center\">Abbrechen</a>\n\n        <p class=\"mt-5 mb-3 text-muted\">© IDPA Blockchain Patientendossier 2018</p>\n      </form>\n    </div>\n  </div>\n</div>\n\n<div *ngIf=\"showResponse\" class=\"container text-center\" style=\"padding: 20px;\">\n  <div class=\"row justify-content-md-center\">\n    <div class=\"col-lg-4 col-md-6 col-sm-12\">\n      <form class=\"form-signin\">\n        <h1 *ngIf=\"!response.valid\" class=\"display-1 text-center\"><i class=\"fas fa-lock text-danger\"></i></h1>\n        <h1 *ngIf=\"response.valid\" class=\"display-1 text-center\"><i class=\"fas fa-check text-success\"></i></h1>\n        <br>\n        <h1 *ngIf=\"response.valid\" class=\"h3 mb-3 font-weight-normal text-center\">Berechtigung hinzugefügt</h1>\n        <h1 *ngIf=\"!response.valid\" class=\"h3 mb-3 font-weight-normal text-center\">Berechtigung verweigert</h1>\n\n        <ul class=\"list-group mb-3\">\n          <li *ngFor=\"let step of response.permissionSteps\" class=\"list-group-item d-flex justify-content-between lh-condensed\" [ngClass]=\"{'bg-light':step.valid}\">\n            <div [ngClass]=\"{'text-success':step.valid,'text-danger':!step.valid}\">\n              <h6 class=\"my-0\">{{step.title}}</h6>\n              <small class=\"text-muted\" [innerHTML]=\"step.description\"></small>\n            </div>\n            <div *ngIf=\"step.valid\" class=\"text-success\"><h4><i class=\"fas fa-check\"></i></h4></div>\n            <div *ngIf=\"!step.valid\" class=\"text-danger\"><h4><i class=\"fas fa-times\"></i></h4></div>\n          </li>\n        </ul>\n\n        <span *ngIf=\"response.valid\">\n          <p><b>Neue Berechtigungen</b></p>\n\n          <table class=\"table\">\n            <thead>\n            <th>Public Key</th>\n            <th>Besitzer</th>\n            </thead>\n            <tbody>\n            <tr *ngFor=\"let premittedPublicKey of permittedPublicKeys\">\n              <td>{{ premittedPublicKey.publicKey }}</td>\n              <td>{{ premittedPublicKey.ownerName }}</td>\n            </tr>\n            </tbody>\n          </table>\n        </span>\n\n        <a *ngIf=\"response.valid\" [routerLink]=\"['/epds']\" class=\"btn btn-lg btn-success btn-block\">Zurück zur Übersicht</a>\n        <button *ngIf=\"!response.valid\" (click)=\"retry()\" class=\"btn btn-lg btn-secondary btn-block\">Erneut versuchen</button>\n\n        <p class=\"mt-5 mb-3 text-muted\">© IDPA Blockchain Patientendossier 2018</p>\n      </form>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/add-permission/add-permission.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddPermissionComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AddPermissionComponent = (function () {
+    function AddPermissionComponent(route, http) {
+        this.route = route;
+        this.http = http;
+        this.showRequest = true;
+        this.showResponse = false;
+        this.request = {};
+        this.response = {};
+        this.permittedPublicKeys = [];
+        this.ehr = {};
+    }
+    AddPermissionComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.ehrId = this.route.snapshot.params['id'];
+        this.http.get('/ehr/' + this.ehrId).subscribe(function (data) {
+            _this.ehr = data;
+        });
+    };
+    AddPermissionComponent.prototype.fireRequest = function () {
+        var _this = this;
+        this.http.post('/entitle/' + this.ehrId, this.request)
+            .subscribe(function (res) {
+            _this.response = res;
+            _this.showRequest = false;
+            _this.showResponse = true;
+            _this.reloadPermissionsOfEhr();
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    AddPermissionComponent.prototype.reloadPermissionsOfEhr = function () {
+        var _this = this;
+        this.permittedPublicKeys = [];
+        this.http.get('/ehr/' + this.ehrId).subscribe(function (data) {
+            var _loop_1 = function (i) {
+                _this.http.get('/get-pk-owner-name/' + data['permittedPublicKeys'][i]).subscribe(function (response) {
+                    _this.permittedPublicKeys.push({
+                        publicKey: data['permittedPublicKeys'][i],
+                        ownerName: response['name']
+                    });
+                });
+            };
+            for (var i = 0; i < data['permittedPublicKeys'].length; i++) {
+                _loop_1(i);
+            }
+        });
+    };
+    AddPermissionComponent.prototype.retry = function () {
+        this.response = {};
+        this.request = {};
+        this.showRequest = true;
+        this.showResponse = false;
+    };
+    return AddPermissionComponent;
+}());
+AddPermissionComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* Component */])({
+        selector: 'app-add-permission',
+        template: __webpack_require__("../../../../../src/app/add-permission/add-permission.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/add-permission/add-permission.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]) === "function" && _b || Object])
+], AddPermissionComponent);
+
+var _a, _b;
+//# sourceMappingURL=add-permission.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/app.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -87,6 +201,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ehr_ehr_component__ = __webpack_require__("../../../../../src/app/ehr/ehr.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__texttonumber_tool_texttonumber_tool_component__ = __webpack_require__("../../../../../src/app/texttonumber-tool/texttonumber-tool.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__encryption_tool_encryption_tool_component__ = __webpack_require__("../../../../../src/app/encryption-tool/encryption-tool.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__add_permission_add_permission_component__ = __webpack_require__("../../../../../src/app/add-permission/add-permission.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -94,6 +209,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -128,6 +244,11 @@ var appRoutes = [
         path: 'ehr-create/:id',
         component: __WEBPACK_IMPORTED_MODULE_9__ehr_create_ehr_create_component__["a" /* EhrCreateComponent */],
         data: { title: 'EHR hinzufügen' }
+    },
+    {
+        path: 'add-permission/:id',
+        component: __WEBPACK_IMPORTED_MODULE_14__add_permission_add_permission_component__["a" /* AddPermissionComponent */],
+        data: { title: 'Berechtigung hinzufügen' }
     },
     {
         path: 'ehr/:id',
@@ -170,7 +291,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_10__key_create_key_create_component__["a" /* KeyCreateComponent */],
             __WEBPACK_IMPORTED_MODULE_11__ehr_ehr_component__["a" /* EhrComponent */],
             __WEBPACK_IMPORTED_MODULE_12__texttonumber_tool_texttonumber_tool_component__["a" /* TexttonumberToolComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__encryption_tool_encryption_tool_component__["a" /* EncryptionToolComponent */]
+            __WEBPACK_IMPORTED_MODULE_13__encryption_tool_encryption_tool_component__["a" /* EncryptionToolComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__add_permission_add_permission_component__["a" /* AddPermissionComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -299,7 +421,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/ehr/ehr.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"showRequestAccess\" class=\"container text-center\" style=\"padding: 20px;\">\n  <div class=\"row justify-content-md-center\">\n    <div class=\"col-lg-4 col-md-6 col-sm-12\">\n      <form class=\"form-signin\" (ngSubmit)=\"requestAccess()\">\n        <h1 class=\"display-1 text-center\"><i class=\"fas fa-lock text-danger\"></i></h1>\n        <br>\n        <p><i>{{ ehr.id }}</i></p>\n        <h1 class=\"h3 mb-3 font-weight-normal\">EHR Zugriff anfordern</h1>\n\n        <label for=\"publicKey\" class=\"sr-only\">Ihr Public Key</label>\n        <input [(ngModel)]=\"accessRequest.requesterPublicKey\" name=\"requesterPublicKey\" type=\"text\" id=\"publicKey\" class=\"form-control\" placeholder=\"Ihr Public Key\" required=\"\" autofocus=\"\">\n        <small class=\"form-text text-muted text-left\">Fügen Sie Ihren Public Key hier ein.</small>\n        <br>\n        <label for=\"signature\" class=\"sr-only\">Signatur</label>\n        <input [(ngModel)]=\"accessRequest.requesterSignature\" name=\"requesterSignature\" type=\"number\" id=\"signature\" class=\"form-control\" placeholder=\"Ihre Signatur\" required=\"\">\n        <small class=\"form-text text-muted text-left\">Die Signatur erstellen Sie, indem Sie die Zahl 12345 mit Ihrem Private Key verschlüsseln.</small>\n        <br>\n        <button class=\"btn btn-lg btn-danger btn-block\" type=\"submit\">Zugriff anfordern</button>\n        <a [routerLink]=\"['/epds']\" class=\"btn btn-default text-center\">Abbrechen</a>\n\n        <p class=\"mt-5 mb-3 text-muted\">© IDPA Blockchain Patientendossier 2018</p>\n      </form>\n    </div>\n  </div>\n</div>\n\n<div *ngIf=\"showAccessResponse\" class=\"container\" style=\"padding: 20px;\">\n  <div class=\"row justify-content-md-center\">\n    <div class=\"col-lg-4 col-md-6 col-sm-12\">\n      <form class=\"form-signin\" (ngSubmit)=\"requestAccess()\">\n        <h1 *ngIf=\"!accessResponse.valid\" class=\"display-1 text-center\"><i class=\"fas fa-lock text-danger\"></i></h1>\n        <h1 *ngIf=\"accessResponse.valid\" class=\"display-1 text-center\"><i class=\"fas fa-unlock text-success\"></i></h1>\n        <br>\n        <h1 *ngIf=\"accessResponse.valid\" class=\"h3 mb-3 font-weight-normal text-center\">Zugriff gewährt</h1>\n        <h1 *ngIf=\"!accessResponse.valid\" class=\"h3 mb-3 font-weight-normal text-center\">Zugriff verweigert</h1>\n\n        <ul class=\"list-group mb-3\">\n          <li *ngFor=\"let step of accessResponse.ehrAccessSteps\" class=\"list-group-item d-flex justify-content-between lh-condensed\" [ngClass]=\"{'bg-light':step.valid}\">\n            <div [ngClass]=\"{'text-success':step.valid,'text-danger':!step.valid}\">\n              <h6 class=\"my-0\">{{step.title}}</h6>\n              <small class=\"text-muted\" [innerHTML]=\"step.description\"></small>\n            </div>\n            <div *ngIf=\"step.valid\" class=\"text-success\"><h4><i class=\"fas fa-check\"></i></h4></div>\n            <div *ngIf=\"!step.valid\" class=\"text-danger\"><h4><i class=\"fas fa-times\"></i></h4></div>\n          </li>\n        </ul>\n\n        <button *ngIf=\"accessResponse.valid\" (click)=\"openEhr()\" class=\"btn btn-lg btn-success btn-block\" type=\"submit\">Weiter zum EHR</button>\n        <button *ngIf=\"!accessResponse.valid\" (click)=\"retry()\" class=\"btn btn-lg btn-light btn-block\">Erneut versuchen</button>\n\n        <p class=\"mt-5 mb-3 text-muted\">© IDPA Blockchain Patientendossier 2018</p>\n      </form>\n    </div>\n  </div>\n</div>\n\n<!--\n<div *ngIf=\"showEhr\" class=\"container\">\n  <h1>EHR: {{ ehr.name }}</h1>\n  <img src=\"{{ ehr.imgSrc }}\">\n\n  <h3>Berechtigungen</h3>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <td>Public Key</td>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let permission of ehr.permissions\">\n      <td><a [routerLink]=\"['/ehr', ehr.id]\">{{ ehr.name }}</a></td>\n    </tr>\n    </tbody>\n  </table>\n  <a class=\"btn btn-default\" [routerLink]=\"['/epds']\">Zurück</a>\n  <button type=\"button\" class=\"btn btn-outline-danger\">Berechtigung hinzufügen</button>\n</div>\n-->\n\n<div *ngIf=\"showEhr\" class=\"container\">\n  <div class=\"row justify-content-md-center\">\n    <div class=\"col-md-4\" style=\"margin-top: 40px;\">\n      <div class=\"card mb-4 box-shadow\">\n        <!--<h1 class=\"card-img-top display-1 text-center\" style=\"height: 180px; width: 100%; display: block; color: #706f6f; padding: 40px\"><i class=\"fas fa-database\"></i></h1>-->\n        <img class=\"card-img-top\" alt=\"{{ehr.name}} [100%x225]\" style=\"height: 225px; width: 100%; display: block;\" src=\"{{ ehr.imageUrl }}\" data-holder-rendered=\"true\">\n        <div class=\"card-body\">\n          <div class=\"d-flex justify-content-between align-items-center\">\n            <h3>EHR</h3><small class=\"text-muted\"><i>{{ ehr.id }}</i></small>\n          </div>\n\n          <br>\n\n          <p>Beschreibung: <span style=\"float: right;\"><i>{{ ehr.name }}</i></span></p>\n          <p>Im EPD von: <span style=\"float: right;\"><i>{{ ehr.ownerName }}</i></span></p>\n\n          <br>\n\n          <hr>\n\n          <p>Berechtigungen</p>\n\n          <table class=\"table\">\n            <thead>\n              <th>Public Key</th>\n              <th>Besitzer</th>\n            </thead>\n            <tbody>\n            <tr *ngFor=\"let premittedPublicKey of permittedPublicKeys\">\n              <td>{{ premittedPublicKey.publicKey }}</td>\n              <td>{{ premittedPublicKey.ownerName }}</td>\n            </tr>\n            </tbody>\n          </table>\n          <a [routerLink]=\"['/epds']\" class=\"btn btn-light btn-block\">Zurück</a>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"showRequestAccess\" class=\"container text-center\" style=\"padding: 20px;\">\n  <div class=\"row justify-content-md-center\">\n    <div class=\"col-lg-4 col-md-6 col-sm-12\">\n      <form class=\"form-signin\" (ngSubmit)=\"requestAccess()\">\n        <h1 class=\"display-1 text-center\"><i class=\"fas fa-lock text-danger\"></i></h1>\n        <br>\n        <p><i>{{ ehr.id }}</i></p>\n        <h1 class=\"h3 mb-3 font-weight-normal\">EHR Zugriff anfordern</h1>\n\n        <label for=\"publicKey\" class=\"sr-only\">Ihr Public Key</label>\n        <input [(ngModel)]=\"accessRequest.requesterPublicKey\" name=\"requesterPublicKey\" type=\"text\" id=\"publicKey\" class=\"form-control\" placeholder=\"Ihr Public Key\" required=\"\" autofocus=\"\">\n        <small class=\"form-text text-muted text-left\">Fügen Sie Ihren Public Key hier ein.</small>\n        <br>\n        <label for=\"signature\" class=\"sr-only\">Signatur</label>\n        <input [(ngModel)]=\"accessRequest.requesterSignature\" name=\"requesterSignature\" type=\"number\" id=\"signature\" class=\"form-control\" placeholder=\"Ihre Signatur\" required=\"\">\n        <small class=\"form-text text-muted text-left\">Die Signatur erstellen Sie, indem Sie die Zahl 12345 mit Ihrem Private Key verschlüsseln.</small>\n        <br>\n        <button class=\"btn btn-lg btn-danger btn-block\" type=\"submit\">Zugriff anfordern</button>\n        <a [routerLink]=\"['/epds']\" class=\"btn btn-default text-center\">Abbrechen</a>\n\n        <p class=\"mt-5 mb-3 text-muted\">© IDPA Blockchain Patientendossier 2018</p>\n      </form>\n    </div>\n  </div>\n</div>\n\n<div *ngIf=\"showAccessResponse\" class=\"container\" style=\"padding: 20px;\">\n  <div class=\"row justify-content-md-center\">\n    <div class=\"col-lg-4 col-md-6 col-sm-12\">\n      <form class=\"form-signin\" (ngSubmit)=\"requestAccess()\">\n        <h1 *ngIf=\"!accessResponse.valid\" class=\"display-1 text-center\"><i class=\"fas fa-lock text-danger\"></i></h1>\n        <h1 *ngIf=\"accessResponse.valid\" class=\"display-1 text-center\"><i class=\"fas fa-unlock text-success\"></i></h1>\n        <br>\n        <h1 *ngIf=\"accessResponse.valid\" class=\"h3 mb-3 font-weight-normal text-center\">Zugriff gewährt</h1>\n        <h1 *ngIf=\"!accessResponse.valid\" class=\"h3 mb-3 font-weight-normal text-center\">Zugriff verweigert</h1>\n\n        <ul class=\"list-group mb-3\">\n          <li *ngFor=\"let step of accessResponse.ehrAccessSteps\" class=\"list-group-item d-flex justify-content-between lh-condensed\" [ngClass]=\"{'bg-light':step.valid}\">\n            <div [ngClass]=\"{'text-success':step.valid,'text-danger':!step.valid}\">\n              <h6 class=\"my-0\">{{step.title}}</h6>\n              <small class=\"text-muted\" [innerHTML]=\"step.description\"></small>\n            </div>\n            <div *ngIf=\"step.valid\" class=\"text-success\"><h4><i class=\"fas fa-check\"></i></h4></div>\n            <div *ngIf=\"!step.valid\" class=\"text-danger\"><h4><i class=\"fas fa-times\"></i></h4></div>\n          </li>\n        </ul>\n\n        <button *ngIf=\"accessResponse.valid\" (click)=\"openEhr()\" class=\"btn btn-lg btn-success btn-block\" type=\"submit\">Weiter zum EHR</button>\n        <button *ngIf=\"!accessResponse.valid\" (click)=\"retry()\" class=\"btn btn-lg btn-secondary btn-block\">Erneut versuchen</button>\n\n        <p class=\"mt-5 mb-3 text-muted\">© IDPA Blockchain Patientendossier 2018</p>\n      </form>\n    </div>\n  </div>\n</div>\n\n<!--\n<div *ngIf=\"showEhr\" class=\"container\">\n  <h1>EHR: {{ ehr.name }}</h1>\n  <img src=\"{{ ehr.imgSrc }}\">\n\n  <h3>Berechtigungen</h3>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <td>Public Key</td>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let permission of ehr.permissions\">\n      <td><a [routerLink]=\"['/ehr', ehr.id]\">{{ ehr.name }}</a></td>\n    </tr>\n    </tbody>\n  </table>\n  <a class=\"btn btn-default\" [routerLink]=\"['/epds']\">Zurück</a>\n  <button type=\"button\" class=\"btn btn-outline-danger\">Berechtigung hinzufügen</button>\n</div>\n-->\n\n<div *ngIf=\"showEhr\" class=\"container\">\n  <div class=\"row justify-content-md-center\">\n    <div class=\"col-md-4\" style=\"margin-top: 40px;\">\n      <div class=\"card mb-4 box-shadow\">\n        <!--<h1 class=\"card-img-top display-1 text-center\" style=\"height: 180px; width: 100%; display: block; color: #706f6f; padding: 40px\"><i class=\"fas fa-database\"></i></h1>-->\n        <img class=\"card-img-top\" alt=\"{{ehr.name}} [100%x225]\" style=\"height: 225px; width: 100%; display: block;\" src=\"{{ ehr.imageUrl }}\" data-holder-rendered=\"true\">\n        <div class=\"card-body\">\n          <div class=\"d-flex justify-content-between align-items-center\">\n            <h3>EHR</h3><small class=\"text-muted\"><i>{{ ehr.id }}</i></small>\n          </div>\n\n          <br>\n\n          <p>Beschreibung: <span style=\"float: right;\"><i>{{ ehr.name }}</i></span></p>\n          <p>Im EPD von: <span style=\"float: right;\"><i>{{ ehr.ownerName }}</i></span></p>\n\n          <br>\n\n          <hr>\n\n          <p>Berechtigungen</p>\n\n          <table class=\"table\">\n            <thead>\n              <th>Public Key</th>\n              <th>Besitzer</th>\n            </thead>\n            <tbody>\n            <tr *ngFor=\"let premittedPublicKey of permittedPublicKeys\">\n              <td>{{ premittedPublicKey.publicKey }}</td>\n              <td>{{ premittedPublicKey.ownerName }}</td>\n            </tr>\n            </tbody>\n          </table>\n          <a [routerLink]=\"['/epds']\" class=\"btn btn-secondary btn-block\">Zurück</a>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -642,7 +764,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/epds/epds.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <h1>Elektronische Patientendossiers</h1>\n    </div>\n\n    <div *ngFor=\"let epd of epds\" class=\"col-md-4\">\n      <div class=\"card mb-4 box-shadow\">\n        <img class=\"card-img-top\" alt=\"{{epd.name}} [100%x225]\" style=\"height: 225px; width: 100%; display: block;\" src=\"/assets/front_page_logo_v5.svg\" data-holder-rendered=\"true\">\n        <hr>\n        <div class=\"card-body\">\n          <div class=\"d-flex justify-content-between align-items-center\">\n            <h3>{{ epd.name }}</h3><small class=\"text-muted\">9 mins</small>\n          </div>\n\n          <p>Public Key: <span class=\"text-right\" style=\"float:right;\"><i>{{ epd.publicKey }}</i></span></p>\n\n          <p>Daten</p>\n\n          <table class=\"table\">\n            <thead>\n              <th>Record</th>\n              <th>Berechtigen</th>\n            </thead>\n            <tbody>\n            <tr *ngFor=\"let ehr of epd.ehrs\">\n              <td><a [routerLink]=\"['/ehr', ehr.id]\">{{ (ehr.id.length>15)? (ehr.id | slice:0:15)+'..':(ehr.id) }}</a></td>\n              <td><button class=\"btn btn-outline-danger btn-sm\"><i class=\"fas fa-lock\"></i></button></td>\n            </tr>\n            </tbody>\n          </table>\n          <a [routerLink]=\"['/ehr-create', epd.id]\" class=\"btn btn-light btn-block\">Daten hinzufügen</a>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"card mb-4 box-shadow\">\n        <img class=\"card-img-top\" style=\"height: 225px; width: 100%; display: block;\" src=\"/assets/plus.svg\" data-holder-rendered=\"true\">\n        <div class=\"card-body\">\n          <a [routerLink]=\"['/epd-create']\" class=\"btn btn-primary btn-block\">Neues EPD eröffnen</a>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <hr>\n\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <h1>Tools</h1>\n    </div>\n    <div class=\"col-md-4 col-sm-12\">\n      <div class=\"card mb-4 box-shadow\">\n        <h1 class=\"card-img-top display-1 text-center\" style=\"height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px\"><i class=\"fas fa-key\"></i></h1>\n        <div class=\"card-body\">\n          <h3 class=\"text-center\">Schlüsselpaare erzeugen</h3>\n          <br>\n          <a [routerLink]=\"['/key-create']\" class=\"btn btn-light btn-block\">Tool öffnen</a>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4 col-sm-12\">\n      <div class=\"card mb-4 box-shadow\">\n        <h1 class=\"card-img-top display-1 text-center\" style=\"height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px\"><i class=\"fas fa-exchange-alt\"></i></h1>\n        <div class=\"card-body\">\n          <h3 class=\"text-center\">Text zu Nummer</h3>\n          <br>\n          <a [routerLink]=\"['/texttonumber-tool']\" class=\"btn btn-light btn-block\">Tool öffnen</a>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4 col-sm-12\">\n      <div class=\"card mb-4 box-shadow\">\n        <h1 class=\"card-img-top display-1 text-center\" style=\"height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px\"><i class=\"fas fa-user-secret\"></i></h1>\n        <div class=\"card-body\">\n          <h3 class=\"text-center\">Verschlüsseln</h3>\n          <br>\n          <a [routerLink]=\"['/encryption-tool']\" class=\"btn btn-light btn-block\">Tool öffnen</a>\n        </div>\n      </div>\n    </div>\n\n  </div>\n\n  <p class=\"mt-5 mb-3 text-muted\">© IDPA Blockchain Patientendossier</p>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <h1>Elektronische Patientendossiers</h1>\n    </div>\n\n    <div *ngFor=\"let epd of epds\" class=\"col-md-4\">\n      <div class=\"card mb-4 box-shadow\">\n        <img class=\"card-img-top\" alt=\"{{epd.name}} [100%x225]\" style=\"height: 225px; width: 100%; display: block;\" src=\"/assets/front_page_logo_v5.svg\" data-holder-rendered=\"true\">\n        <hr>\n        <div class=\"card-body\">\n          <div class=\"d-flex justify-content-between align-items-center\">\n            <h3>{{ epd.name }}</h3><small class=\"text-muted\">9 mins</small>\n          </div>\n\n          <p>Public Key: <span class=\"text-right\" style=\"float:right;\"><i>{{ epd.publicKey }}</i></span></p>\n\n          <p>Daten</p>\n\n          <table class=\"table\">\n            <thead>\n              <th>Record</th>\n              <th>Berechtigen</th>\n            </thead>\n            <tbody>\n            <tr *ngFor=\"let ehr of epd.ehrs\">\n              <td><a [routerLink]=\"['/ehr', ehr.id]\">{{ (ehr.id.length>15)? (ehr.id | slice:0:15)+'..':(ehr.id) }}</a></td>\n              <td><a [routerLink]=\"['/add-permission', ehr.id]\" class=\"btn btn-outline-danger btn-sm\"><i class=\"fas fa-lock\"></i></a></td>\n            </tr>\n            </tbody>\n          </table>\n          <a [routerLink]=\"['/ehr-create', epd.id]\" class=\"btn btn-light btn-block\">Daten hinzufügen</a>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"card mb-4 box-shadow\">\n        <img class=\"card-img-top\" style=\"height: 225px; width: 100%; display: block;\" src=\"/assets/plus.svg\" data-holder-rendered=\"true\">\n        <div class=\"card-body\">\n          <a [routerLink]=\"['/epd-create']\" class=\"btn btn-primary btn-block\">Neues EPD eröffnen</a>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <hr>\n\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <h1>Tools</h1>\n    </div>\n    <div class=\"col-md-4 col-sm-12\">\n      <div class=\"card mb-4 box-shadow\">\n        <h1 class=\"card-img-top display-1 text-center\" style=\"height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px\"><i class=\"fas fa-key\"></i></h1>\n        <div class=\"card-body\">\n          <h3 class=\"text-center\">Schlüsselpaare erzeugen</h3>\n          <br>\n          <a [routerLink]=\"['/key-create']\" class=\"btn btn-secondary btn-block\">Tool öffnen</a>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4 col-sm-12\">\n      <div class=\"card mb-4 box-shadow\">\n        <h1 class=\"card-img-top display-1 text-center\" style=\"height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px\"><i class=\"fas fa-exchange-alt\"></i></h1>\n        <div class=\"card-body\">\n          <h3 class=\"text-center\">Text zu Nummer</h3>\n          <br>\n          <a [routerLink]=\"['/texttonumber-tool']\" class=\"btn btn-secondary btn-block\">Tool öffnen</a>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4 col-sm-12\">\n      <div class=\"card mb-4 box-shadow\">\n        <h1 class=\"card-img-top display-1 text-center\" style=\"height: 140px; width: 100%; display: block; color: #706f6f; padding: 40px\"><i class=\"fas fa-user-secret\"></i></h1>\n        <div class=\"card-body\">\n          <h3 class=\"text-center\">Verschlüsseln</h3>\n          <br>\n          <a [routerLink]=\"['/encryption-tool']\" class=\"btn btn-secondary btn-block\">Tool öffnen</a>\n        </div>\n      </div>\n    </div>\n\n  </div>\n\n  <p class=\"mt-5 mb-3 text-muted\">© IDPA Blockchain Patientendossier</p>\n</div>\n"
 
 /***/ }),
 

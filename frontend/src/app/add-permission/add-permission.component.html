@@ -1,3 +1,72 @@
-<p>
-  add-permission works!
-</p>
+<div *ngIf="showRequest" class="container text-center" style="padding: 20px;">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <form class="form-signin" (ngSubmit)="fireRequest()">
+        <h1 class="display-1 text-center"><i class="fas fa-lock text-danger"></i></h1>
+        <br>
+        <p><i>EHR: {{ ehrId }}</i></p>
+        <h1 class="h3 mb-3 font-weight-normal">Berechtigung hinzufügen</h1>
+
+        <label for="publicKey" class="sr-only">Public Key</label>
+        <input [(ngModel)]="request.publicKey" name="publicKey" type="text" id="publicKey" class="form-control" placeholder="Public Key" required="" autofocus="">
+        <small class="form-text text-muted text-left">Fügen Sie den Public Key ein den Sie <b>berechtigen</b> wollen.</small>
+        <br>
+        <label for="signature" class="sr-only">Signatur</label>
+        <input [(ngModel)]="request.signature" name="requesterSignature" type="number" id="signature" class="form-control" placeholder="Ihre Signatur" required="">
+        <small class="form-text text-muted text-left">Die Signatur erstellen Sie, indem Sie die Zahl <b>12345</b> mit Ihrem Private Key verschlüsseln.</small>
+        <br>
+        <button class="btn btn-lg btn-danger btn-block" type="submit">Berechtigen</button>
+        <a [routerLink]="['/epds']" class="btn btn-default text-center">Abbrechen</a>
+
+        <p class="mt-5 mb-3 text-muted">© IDPA Blockchain Patientendossier 2018</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showResponse" class="container text-center" style="padding: 20px;">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <form class="form-signin">
+        <h1 *ngIf="!response.valid" class="display-1 text-center"><i class="fas fa-lock text-danger"></i></h1>
+        <h1 *ngIf="response.valid" class="display-1 text-center"><i class="fas fa-check text-success"></i></h1>
+        <br>
+        <h1 *ngIf="response.valid" class="h3 mb-3 font-weight-normal text-center">Berechtigung hinzugefügt</h1>
+        <h1 *ngIf="!response.valid" class="h3 mb-3 font-weight-normal text-center">Berechtigung verweigert</h1>
+
+        <ul class="list-group mb-3">
+          <li *ngFor="let step of response.permissionSteps" class="list-group-item d-flex justify-content-between lh-condensed" [ngClass]="{'bg-light':step.valid}">
+            <div [ngClass]="{'text-success':step.valid,'text-danger':!step.valid}">
+              <h6 class="my-0">{{step.title}}</h6>
+              <small class="text-muted" [innerHTML]="step.description"></small>
+            </div>
+            <div *ngIf="step.valid" class="text-success"><h4><i class="fas fa-check"></i></h4></div>
+            <div *ngIf="!step.valid" class="text-danger"><h4><i class="fas fa-times"></i></h4></div>
+          </li>
+        </ul>
+
+        <span *ngIf="response.valid">
+          <p><b>Neue Berechtigungen</b></p>
+
+          <table class="table">
+            <thead>
+            <th>Public Key</th>
+            <th>Besitzer</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let premittedPublicKey of permittedPublicKeys">
+              <td>{{ premittedPublicKey.publicKey }}</td>
+              <td>{{ premittedPublicKey.ownerName }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </span>
+
+        <a *ngIf="response.valid" [routerLink]="['/epds']" class="btn btn-lg btn-success btn-block">Zurück zur Übersicht</a>
+        <button *ngIf="!response.valid" (click)="retry()" class="btn btn-lg btn-secondary btn-block">Erneut versuchen</button>
+
+        <p class="mt-5 mb-3 text-muted">© IDPA Blockchain Patientendossier 2018</p>
+      </form>
+    </div>
+  </div>
+</div>

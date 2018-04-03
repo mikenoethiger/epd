@@ -46,7 +46,7 @@
         </ul>
 
         <button *ngIf="accessResponse.valid" (click)="openEhr()" class="btn btn-lg btn-success btn-block" type="submit">Weiter zum EHR</button>
-        <button *ngIf="!accessResponse.valid" (click)="retry()" class="btn btn-lg btn-light btn-block">Erneut versuchen</button>
+        <button *ngIf="!accessResponse.valid" (click)="retry()" class="btn btn-lg btn-secondary btn-block">Erneut versuchen</button>
 
         <p class="mt-5 mb-3 text-muted">© IDPA Blockchain Patientendossier 2018</p>
       </form>
@@ -111,7 +111,7 @@
             </tr>
             </tbody>
           </table>
-          <a [routerLink]="['/epds']" class="btn btn-light btn-block">Zurück</a>
+          <a [routerLink]="['/epds']" class="btn btn-secondary btn-block">Zurück</a>
         </div>
       </div>
     </div>
