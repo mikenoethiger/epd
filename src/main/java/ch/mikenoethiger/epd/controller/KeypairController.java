@@ -24,7 +24,7 @@ public class KeypairController {
 	@RequestMapping(method = RequestMethod.POST, value = "/keys")
 	public KeyInfo generateKeys(@RequestBody KeysRequest keysRequest) throws NoSuchAlgorithmException {
 		IndependentPrimes independentPrimes = cryptographyService.generateIndependantPrimes(keysRequest.getSize());
-
+		
 		RsaKeyBuilder rsaKeyBuilder = new DefaultRsaKeyBuilder(cryptographyService, independentPrimes);
 		while (rsaKeyBuilder.getD() < 0) {
 			rsaKeyBuilder = new DefaultRsaKeyBuilder(cryptographyService, cryptographyService.generateIndependantPrimes(3));

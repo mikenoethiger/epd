@@ -30,4 +30,10 @@ export class EpdsComponent implements OnInit {
       );
   }
 
+  sync() {
+    this.http.get('/epd').subscribe(data => {
+      this.epds = data;
+    });
+  }
+
 }

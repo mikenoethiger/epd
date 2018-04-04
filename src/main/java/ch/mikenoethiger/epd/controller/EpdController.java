@@ -149,4 +149,24 @@ public class EpdController {
 		}
 		return new GetPkOwnerNameRequest("Unbekannt");
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/clear")
+	public String clearDb() {
+		epdRepository.deleteAll();
+		ehrRepository.deleteAll();
+		return "everything cleared";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/setup")
+	public String setupDb() {
+		epdRepository.deleteAll();
+		ehrRepository.deleteAll();
+		
+		Epd epd = new Epd();
+		epd.setPublicKey("52163N120457");
+		epd.setName("Fitness Trainer");
+		epdRepository.save(epd);
+		
+		return "everything setup";
+	}
 }

@@ -9,11 +9,11 @@
           <form (ngSubmit)="encryptText()" #contactForm="ngForm">
             <div class="form-group">
               <label for="number">Nummer</label>
-              <input type="number" class="form-control" [(ngModel)]="number" name="number" id="number" required>
+              <input type="number" class="form-control" [(ngModel)]="number" name="number" id="number" placeholder="12345" required>
             </div>
             <div class="form-group">
               <label for="key">Schlüssel</label>
-              <input type="text" class="form-control" [(ngModel)]="key" name="key" id="key" required>
+              <input type="text" class="form-control" [(ngModel)]="key" name="key" id="key" placeholder="54321N123456" required>
             </div>
             <div class="form-group">
               <label for="encrypted">Verschlüsselt</label>
